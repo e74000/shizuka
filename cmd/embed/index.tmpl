@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Title }}</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header>
+    <h1>Shizuka</h1>
+</header>
+<main>
+    <section class="description"> {{.Content}} </section>
+
+    <section class="posts-list">
+        {{range $post := index .PageMap "/posts"}}
+        <div class="post">
+            <a href="{{ $post.Path }}">{{ $post.Title }}</a>
+        </div>
+        {{end}}
+    </section>
+</main>
+<footer>
+    <p>&copy; <a href="https://e74000.net"> e74net </a> / <a href="https://github.com/e74000/shizuka"> shizuka </a>, Built with ☕️ and ❤️.</p>
+</footer>
+</body>
+</html>

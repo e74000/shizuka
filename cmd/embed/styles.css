@@ -1,0 +1,121 @@
+/* General */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+a {
+    color: #6091d3;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Header */
+header {
+    padding: 2rem 1rem;
+    text-align: center;
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    color: #fff;
+    border-bottom: 1px solid #333;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin: 0.5rem 0;
+}
+
+header p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.home-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #fff;
+    text-decoration: none;
+}
+
+.home-link:hover {
+    text-decoration: underline;
+}
+
+/* Post List */
+.posts-list {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.description {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    text-align: center;
+}
+
+.post {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #333;
+}
+
+.post:last-child {
+    border-bottom: none;
+}
+
+.post a {
+    font-size: 1.2rem;
+    display: block;
+}
+
+/* Post Content */
+article {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Preformatted Code */
+pre, code {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    background: #333;
+    color: #f8f8f2;
+    padding: 0.6rem;
+    margin: 0;
+}
+
+pre {
+    overflow-x: auto;
+}
+
+code {
+    padding: 0.1rem 0.2rem;
+    margin: 0.1rem 0; /* Add vertical spacing between code blocks */
+    background: #333;
+    color: #f8f8f2;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    display: inline-block;
+}
+
+
+/* Footer */
+footer {
+    margin-top: auto;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.8rem;
+    background-color: #1a1a1a;
+    border-top: 1px solid #333;
+}

@@ -1,0 +1,41 @@
+# Go-related
+/bin/
+/pkg/
+/*.exe
+/*.dll
+/*.so
+/*.dylib
+*.out
+*.a
+
+# Build and IDE-specific
+/build/
+/dist/
+/.vscode/
+/.idea/
+
+# Logs
+*.log
+*.tmp
+
+# Generated files
+*.test
+*.cover
+coverage.out
+
+# Cache and dependencies
+/go.sum
+/.cache/
+/tmp/
+/node_modules/
+
+# Temporary files
+*.swp
+*.bak
+*.~*
+*.old
+
+# System-specific files
+.DS_Store
+Thumbs.db
+desktop.ini
