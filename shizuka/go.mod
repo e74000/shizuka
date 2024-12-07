@@ -1,4 +1,4 @@
-module shizuka/shizuka
+module github.com/e74000/shizuka/shizuka
 
 go 1.23.4
 

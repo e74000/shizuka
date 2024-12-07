@@ -1,9 +1,11 @@
-module shizuka
+module github.com/e74000/shizuka
 
 go 1.23.4
 
 require (
 	github.com/charmbracelet/log v0.4.0
+	github.com/fsnotify/fsnotify v1.8.0
+	github.com/gorilla/websocket v1.5.3
 	github.com/spf13/cobra v1.8.1
 	github.com/yuin/goldmark v1.7.8
 	gopkg.in/yaml.v3 v3.0.1

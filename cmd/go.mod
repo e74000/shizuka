@@ -1,4 +1,4 @@
-module shizuka/cmd
+module github.com/e74000/shizuka/cmd
 
 go 1.23.4
 
