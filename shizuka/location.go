@@ -43,7 +43,7 @@ func ContentLocation(srcRoot, dstRoot, srcPath string) (*Location, string, error
 			relPath = strings.TrimSuffix(relPath, ".md")
 			dstPath := filepath.Join(dstRoot, relPath) + ".html"
 			relPath = filepath.Dir(relPath)
-			
+
 			return &Location{
 				SrcPath: srcPath,
 				DstPath: dstPath,

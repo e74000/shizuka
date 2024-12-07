@@ -2,13 +2,13 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/e74000/shizuka/shizuka"
 	"github.com/fsnotify/fsnotify"
 	"github.com/gorilla/websocket"
 	"github.com/spf13/cobra"
 	"net/http"
 	"os"
 	"path/filepath"
-	"shizuka/shizuka"
 	"sync"
 	"time"
 )

@@ -1,10 +1,9 @@
 package cmd
 
 import (
+	"github.com/spf13/cobra"
 	"net/http"
 	"os"
-
-	"github.com/spf13/cobra"
 )
 
 var serveCmd = &cobra.Command{

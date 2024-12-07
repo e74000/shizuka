@@ -3,8 +3,8 @@ package cmd
 import (
 	"encoding/json"
 	"github.com/charmbracelet/log"
+	"github.com/e74000/shizuka/shizuka"
 	"os"
-	"shizuka/shizuka"
 )
 
 const (
