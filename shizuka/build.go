@@ -246,6 +246,17 @@ func (pb *PageBuilder) pageData(page Page) PageData {
 
 func (pb *PageBuilder) replicateStatic() error {
 	for _, location := range pb.static {
+
+		// if we are in a dev environment then ignore temp files
+		if strings.HasSuffix(location.SrcPath, "~") && pb.Opts.Dev {
+			continue
+		}
+
+		// /ws is used for hot-reloading in dev env, so we need to be careful if a page shares the same path
+		if location.RelPath == "/ws" {
+			log.Warn("/ws path is reserved for websocket communication in the dev environment. this may cause unexpected behaviour between dev and prod", "file", location.SrcPath)
+		}
+
 		// Open the source file
 		srcFile, err := os.Open(location.SrcPath)
 		if err != nil {
