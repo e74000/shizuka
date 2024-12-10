@@ -4,7 +4,7 @@ go 1.23.4
 
 require (
 	github.com/charmbracelet/log v0.4.0
-	github.com/e74000/shizuka/shizuka v0.0.0-20241207232901-d1d6b2b3a7f9
+	github.com/e74000/shizuka/shizuka v0.0.0-20241210170914-b1ab1c1ef55c
 	github.com/fsnotify/fsnotify v1.8.0
 	github.com/gorilla/websocket v1.5.3
 	github.com/spf13/cobra v1.8.1
@@ -13,7 +13,7 @@ require (
 require (
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
 	github.com/charmbracelet/lipgloss v1.0.0 // indirect
-	github.com/charmbracelet/x/ansi v0.5.2 // indirect
+	github.com/charmbracelet/x/ansi v0.6.0 // indirect
 	github.com/go-logfmt/logfmt v0.6.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
