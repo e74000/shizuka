@@ -87,7 +87,7 @@ This compiles your site into the `dist/` folder (or as specified in `shizuka_con
 
 ## Contributing
 
-Contributions are welcome! There's many way's we could improve this, so please feel free to contribute if you have any ideads on what we can improve.
+Contributions are welcome! There's many ways we could improve this, so please feel free to contribute.
 
 ---
 
