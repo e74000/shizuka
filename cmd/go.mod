@@ -4,7 +4,7 @@ go 1.23.4
 
 require (
 	github.com/charmbracelet/log v0.4.0
-	github.com/e74000/shizuka/shizuka v0.0.0-20241217152954-371e142e0ba4
+	github.com/e74000/shizuka/shizuka v0.0.0-20241219205641-67052b7b1db6
 	github.com/fsnotify/fsnotify v1.8.0
 	github.com/gorilla/websocket v1.5.3
 	github.com/spf13/cobra v1.8.1

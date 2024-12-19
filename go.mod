@@ -2,14 +2,14 @@ module github.com/e74000/shizuka
 
 go 1.23.4
 
-require github.com/e74000/shizuka/cmd v0.0.0-20241217152954-371e142e0ba4
+require github.com/e74000/shizuka/cmd v0.0.0-20241219205641-67052b7b1db6
 
 require (
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
 	github.com/charmbracelet/lipgloss v1.0.0 // indirect
 	github.com/charmbracelet/log v0.4.0 // indirect
 	github.com/charmbracelet/x/ansi v0.6.0 // indirect
-	github.com/e74000/shizuka/shizuka v0.0.0-20241217152954-371e142e0ba4 // indirect
+	github.com/e74000/shizuka/shizuka v0.0.0-20241219205641-67052b7b1db6 // indirect
 	github.com/fsnotify/fsnotify v1.8.0 // indirect
 	github.com/go-logfmt/logfmt v0.6.0 // indirect
 	github.com/gorilla/websocket v1.5.3 // indirect

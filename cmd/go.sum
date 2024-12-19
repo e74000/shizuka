@@ -17,6 +17,8 @@ github.com/e74000/shizuka/shizuka v0.0.0-20241210170914-b1ab1c1ef55c h1:yvysOtBW
 github.com/e74000/shizuka/shizuka v0.0.0-20241210170914-b1ab1c1ef55c/go.mod h1:++otKJlpBPN+AHDLYoAP4XX91KDV4Tr8SaeGPIicwDk=
 github.com/e74000/shizuka/shizuka v0.0.0-20241217152954-371e142e0ba4 h1:mofkzCRAHvoq2GzTspvPrHA+J56MFl49EehMHUiV/jE=
 github.com/e74000/shizuka/shizuka v0.0.0-20241217152954-371e142e0ba4/go.mod h1:dEuLQ/dtUtwhikc+WSc4tNCYS/CvEoODWHy2OddhrsA=
+github.com/e74000/shizuka/shizuka v0.0.0-20241219205641-67052b7b1db6 h1:W/15tWFovA4RpoO7RffoXKjx5/Lbcy7kA9wRHIRUcUg=
+github.com/e74000/shizuka/shizuka v0.0.0-20241219205641-67052b7b1db6/go.mod h1:k4W+eUnsXY30rm3faHfrGaT85EMSrutryDeY6Ibj2YA=
 github.com/fsnotify/fsnotify v1.8.0 h1:dAwr6QBTBZIkG8roQaJjGof0pp0EeF+tNV7YBP3F/8M=
 github.com/fsnotify/fsnotify v1.8.0/go.mod h1:8jBTzvmWwFyi3Pb8djgCCO5IBqzKJ/Jwo8TRcHyHii0=
 github.com/go-logfmt/logfmt v0.6.0 h1:wGYYu3uicYdqXVgoYbvnkrPVXkuLM1p1ifugDMEdRi4=
