@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/charmbracelet/log"
 	"github.com/yuin/goldmark"
+	gmhtml "github.com/yuin/goldmark/renderer/html"
 	"html/template"
 	"io"
 	"os"
@@ -108,7 +109,11 @@ func (pb *PageBuilder) Index() (err error) {
 	pb.static = static
 	pb.templates = templates
 
-	md := goldmark.New()
+	md := goldmark.New(
+		goldmark.WithRendererOptions(
+			gmhtml.WithUnsafe(),
+		),
+	)
 
 	pb.pages = make(map[string]Page)
 	pb.pageMap = make(map[string][]Lite)

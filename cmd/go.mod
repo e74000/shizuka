@@ -4,7 +4,7 @@ go 1.23.4
 
 require (
 	github.com/charmbracelet/log v0.4.0
-	github.com/e74000/shizuka/shizuka v0.0.0-20241210170914-b1ab1c1ef55c
+	github.com/e74000/shizuka/shizuka v0.0.0-20241217152954-371e142e0ba4
 	github.com/fsnotify/fsnotify v1.8.0
 	github.com/gorilla/websocket v1.5.3
 	github.com/spf13/cobra v1.8.1
@@ -23,7 +23,7 @@ require (
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/yuin/goldmark v1.7.8 // indirect
-	golang.org/x/exp v0.0.0-20241204233417-43b7b7cde48d // indirect
+	golang.org/x/exp v0.0.0-20241217172543-b2144cdd0a67 // indirect
 	golang.org/x/sys v0.28.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
