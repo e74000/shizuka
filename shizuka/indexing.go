@@ -29,6 +29,7 @@ func walk(root string) (files []string, dirs []string, err error) {
 	return files, dirs, nil
 }
 
+// this function is horrible, apologies to everyone who has to look at it
 func index(src, dst string) (dirs, content, static []Location, templates *template.Template, err error) {
 	contentRoot := filepath.Join(src, "content")
 	staticRoot := filepath.Join(src, "static")

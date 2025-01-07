@@ -2,8 +2,14 @@ package shizuka
 
 import (
 	"bytes"
-	"fmt"
+	"errors"
 	"gopkg.in/yaml.v3"
+)
+
+var (
+	ErrorFrontmatterDelim   = errors.New("frontmatter delimited incorrectly")
+	ErrorFrontmatterPos     = errors.New("text before frontmatter")
+	ErrorFrontmatterInvalid = errors.New("invalid frontmatter")
 )
 
 type Frontmatter struct {
@@ -17,7 +23,14 @@ type Frontmatter struct {
 	MetaDescription string `yaml:"meta_description"`
 	MetaKeywords    string `yaml:"meta_keywords"`
 
-	Data map[string]any `yaml:"data"`
+	SitemapInclude    bool   `yaml:"sitemap_include"`
+	SitemapChangeFreq string `yaml:"sitemap_change_freq"`
+	SitemapPriority   string `yaml:"sitemap_priority"`
+
+	RSSInclude bool `yaml:"rss_include"`
+
+	Data     map[string]any `yaml:"data"`
+	LiteData map[string]any `yaml:"lite_data"`
 
 	Template string `yaml:"template"`
 }
@@ -30,16 +43,16 @@ func extractFrontmatter(content []byte) (*Frontmatter, []byte, error) {
 	}
 
 	if len(parts) < 3 {
-		return new(Frontmatter), content, fmt.Errorf("frontmatter not properly delimited by '---'")
+		return new(Frontmatter), content, ErrorFrontmatterDelim
 	}
 
 	if len(parts[0]) != 0 {
-		return new(Frontmatter), content, fmt.Errorf("text before frontmatter")
+		return new(Frontmatter), content, ErrorFrontmatterPos
 	}
 
 	frontmatter := new(Frontmatter)
 	if err := yaml.Unmarshal(parts[1], frontmatter); err != nil {
-		return new(Frontmatter), content, fmt.Errorf("failed to parse YAML frontmatter: %w", err)
+		return new(Frontmatter), content, ErrorFrontmatterInvalid
 	}
 
 	return frontmatter, bytes.Join(parts[2:], []byte{}), nil

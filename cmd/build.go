@@ -1,39 +1,31 @@
 package cmd
 
 import (
+	"github.com/charmbracelet/log"
 	"github.com/spf13/cobra"
 )
 
 var buildCmd = &cobra.Command{
-	Use:   "build [src] [dst]",
+	Use:   "build",
 	Short: "Build the site",
-	Long: `Build the static site from the source directory to the destination directory.
-Defaults are 'site' for src and 'dist' for dst.`,
-	Args: cobra.MaximumNArgs(2),
-	Run:  buildFunc,
+	Long:  `Builds site from the src directory to the dst directory, as specified in shizuka_conf.json`,
+	Args:  cobra.MaximumNArgs(0),
+	Run:   buildFunc,
 }
 
 func buildFunc(cmd *cobra.Command, args []string) {
-	var src, dst string
+	config := GetConfig()
 
-	if len(args) == 2 {
-		src, dst = args[0], args[1]
-	} else if len(args) == 0 {
-		config := GetConfig()
-		src, dst = config.Src, config.Dst
-	} else {
-		cmd.PrintErrln("Usage: build [src] [dst] (provide both or neither)")
+	if !exists(config.Src) {
+		log.Error("source directory doesn't exist", "directory", config.Src)
+	}
+
+	if err := buildSite(config.Src, config.Dst, makeOpts(config)); err != nil {
+		log.Error("failed to build site", "error", err)
 		return
 	}
 
-	cmd.Printf("Building (%s) -> %s\n", src, dst)
-
-	if err := buildSite(src, dst, nil); err != nil {
-		cmd.PrintErrln("Failed to build site:", err)
-		return
-	}
-
-	cmd.Println("Built successfully")
+	log.Info("built site successfully")
 }
 
 func init() {

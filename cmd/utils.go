@@ -9,26 +9,43 @@ import (
 
 const (
 	ConfigPath = "shizuka_conf.json"
-
-	DefaultSrc  = "site"
-	DefaultDst  = "dist"
-	DegaultPort = "8080"
 )
+
+var DefaultConf = Config{
+	Src:  "site",
+	Dst:  "dist",
+	Port: "8080",
+
+	UseSitemap: false,
+	UseRSS:     false,
+	BaseURL:    "",
+}
 
 // Config represents the structure of shizuka_conf.json
 type Config struct {
 	Src  string `json:"src"`
 	Dst  string `json:"dst"`
 	Port string `json:"port"`
+
+	UseSitemap bool `json:"use_sitemap"`
+	UseRSS     bool `json:"use_rss"`
+
+	BaseURL string `json:"base_url"`
+
+	SiteTitle       string `json:"site_title"`
+	SiteDescription string `json:"site_description"`
+	SiteLang        string `json:"site_lang"`
 }
 
 // GetConfig loads the configuration from shizuka_conf.json or returns default values.
 func GetConfig() Config {
 	// Default configuration
 	defaultConfig := Config{
-		Src:  DefaultSrc,
-		Dst:  DefaultDst,
-		Port: DegaultPort,
+		Src:        DefaultConf.Src,
+		Dst:        DefaultConf.Dst,
+		Port:       DefaultConf.Port,
+		UseSitemap: DefaultConf.UseSitemap,
+		BaseURL:    DefaultConf.BaseURL,
 	}
 
 	// Open shizuka_conf.json
@@ -56,6 +73,9 @@ func GetConfig() Config {
 	}
 	if config.Port == "" {
 		config.Port = defaultConfig.Port
+	}
+	if config.BaseURL == "" {
+		config.BaseURL = defaultConfig.BaseURL
 	}
 
 	return config
@@ -97,4 +117,20 @@ func buildSite(src, dst string, opts *shizuka.BuildOpts) error {
 	}
 
 	return nil
+}
+
+func exists(filename string) bool {
+	_, err := os.Stat(filename)
+	return err == nil
+}
+
+func makeOpts(config Config) *shizuka.BuildOpts {
+	return &shizuka.BuildOpts{
+		UseSitemap:      config.UseSitemap,
+		UseRss:          config.UseRSS,
+		BaseURL:         config.BaseURL,
+		SiteTitle:       config.SiteTitle,
+		SiteDescription: config.SiteDescription,
+		SiteLang:        config.SiteLang,
+	}
 }

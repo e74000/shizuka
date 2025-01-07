@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/e74000/shizuka/shizuka"
+	"github.com/charmbracelet/log"
 	"github.com/fsnotify/fsnotify"
 	"github.com/gorilla/websocket"
 	"github.com/spf13/cobra"
@@ -41,44 +41,29 @@ const liveReloadScript = `
 `
 
 func devFunc(cmd *cobra.Command, args []string) {
-	var src, dst string
-	port := portFlag
+	config := GetConfig()
 
-	if len(args) == 2 {
-		src, dst = args[0], args[1]
-	} else if len(args) == 0 {
-		config := GetConfig()
-		src, dst = config.Src, config.Dst
-		if port == "" {
-			port = config.Port
-		}
-	} else {
-		cmd.PrintErrln("Usage: build [src] [dst] (provide both or neither)")
-		return
-	}
-
-	// Ensure source and destination directories exist
-	if _, err := os.Stat(src); os.IsNotExist(err) {
-		cmd.PrintErr("Source directory (%s) does not exist\n", src)
+	// check source exists
+	if _, err := os.Stat(config.Src); os.IsNotExist(err) {
+		log.Error("source directory doesn't exist", "directory", config.Src)
 		os.Exit(1)
 		return
 	}
 
-	opts := shizuka.BuildOpts{
-		Dev:       true,
-		DevScript: liveReloadScript,
-	}
+	opts := makeOpts(config)
+	opts.Dev = true
+	opts.DevScript = liveReloadScript
 
-	// Rebuild the site initially
-	if err := buildSite(src, dst, &opts); err != nil {
-		cmd.PrintErrln("Failed to build site:", err)
+	// initial build
+	if err := buildSite(config.Src, config.Dst, opts); err != nil {
+		log.Error("initial build failed", "error", err)
 		os.Exit(1)
 		return
 	}
 
-	// Serve the site
+	// run the http server
 	go func() {
-		cmd.Printf("Serving at http://localhost:%s\n", port)
+		log.Info("serving...", "port", config.Port)
 
 		http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
 			conn, err := upgrader.Upgrade(w, r, nil)
@@ -91,26 +76,26 @@ func devFunc(cmd *cobra.Command, args []string) {
 			clientsMu.Unlock()
 		})
 
-		http.Handle("/", http.StripPrefix("/", http.FileServer(http.Dir(dst))))
+		http.Handle("/", http.StripPrefix("/", http.FileServer(http.Dir(config.Dst))))
 
-		err := http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
+		err := http.ListenAndServe(fmt.Sprintf(":%s", config.Port), nil)
 		if err != nil {
-			cmd.PrintErrln("Failed to start server:", err)
+			log.Error("listen error", "error", err)
 			os.Exit(1)
 			return
 		}
 	}()
 
-	// Watch the source directory
+	// run the watcher
 	go func() {
 		watcher, err := fsnotify.NewWatcher()
 		if err != nil {
-			cmd.PrintErrln("Failed to create watcher:", err)
+			log.Error("watcher init error", "error", err)
 			os.Exit(1)
 		}
 		defer watcher.Close()
 
-		err = filepath.Walk(src, func(path string, info os.FileInfo, err error) error {
+		err = filepath.Walk(config.Src, func(path string, info os.FileInfo, err error) error {
 			if err != nil {
 				return err
 			}
@@ -120,7 +105,7 @@ func devFunc(cmd *cobra.Command, args []string) {
 			return nil
 		})
 		if err != nil {
-			cmd.PrintErrln("Failed to add directory to watcher:", err)
+			log.Error("watcher init error", "error", err)
 			os.Exit(1)
 		}
 
@@ -132,23 +117,21 @@ func devFunc(cmd *cobra.Command, args []string) {
 			case event := <-watcher.Events:
 				if event.Op&(fsnotify.Write|fsnotify.Create|fsnotify.Remove|fsnotify.Rename) != 0 {
 					if time.Since(lastBuild) > debounceDuration {
-						cmd.Println("Changes detected, rebuilding...")
-						if err := buildSite(src, dst, &opts); err != nil {
-							cmd.PrintErrln("Failed to build site:", err)
+						if err := buildSite(config.Src, config.Dst, opts); err != nil {
+							log.Error("build failed", "error", err)
 						} else {
-							cmd.Println("Successfully built site")
 							notifyClients()
 						}
 						lastBuild = time.Now()
 					}
 				}
 			case err := <-watcher.Errors:
-				cmd.PrintErrln("Watcher error:", err)
+				log.Error("watcher error", "error", err)
 			}
 		}
 	}()
 
-	select {} // Keep the function running
+	select {} // run forever
 }
 
 // Notify connected clients to reload
@@ -165,6 +148,5 @@ func notifyClients() {
 }
 
 func init() {
-	devCmd.Flags().StringVarP(&portFlag, "port", "p", "", "Port to run the server on (overrides config)")
 	rootCmd.AddCommand(devCmd)
 }
