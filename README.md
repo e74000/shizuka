@@ -1,6 +1,6 @@
 # Shizuka
 
-Shizuka is a minimalist static site generator (SSG) named after the character Shizuka from 君のことが大大大大大好きな100人の彼女. Much like the character it’s named after, Shizuka is small, quiet, and loves reading.
+Shizuka is a minimalist static site generator.
 
 Shizuka is designed to be very general; whether you’re setting up a personal blog, a project showcase, or just a space to collect your thoughts, Shizuka is designed to make the process of building and maintaining your site simple.
 
