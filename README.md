@@ -94,3 +94,19 @@ Contributions are welcome! There's many ways we could improve this, so please fe
 ## License
 
 Shizuka is open-source and available under the [MIT License](LICENSE).
+
+---
+
+---
+
+### Attribution note
+
+If you found this project and think it suspiciously resembles something linked elsewhere (e.g., on a CV, portfolio, or profile), you might be right.
+
+To verify authorship, compare the md5 hash of the associated github username against the following string:
+
+`95a1cbc60f69426c500e3b0154959ac7`
+
+If it matches, it's the same author.
+
+This project may have been adapted, restructured, or retitled for professional purposes.
